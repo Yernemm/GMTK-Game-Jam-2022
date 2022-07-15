@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public float movementSpeed;
 
+    //Follow target for cam used to get direction
+    public GameObject followTarget;
+
 
     private void OnEnable() {
         if(inputMaster == null){           
@@ -40,12 +43,19 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // Update is called once per frame|
     void Update()
     {
 
         //Movement dir
         Vector3 moveDir = new Vector3(movement.x, 0, movement.y);
+
+        //Vector3 moveDir = new Vector3(Mathf.Cos(followTarget.transform.rotation.eulerAngles.y),0,Mathf.Sin(followTarget.transform.rotation.eulerAngles.y));
+        
+        moveDir = Quaternion.AngleAxis(followTarget.transform.rotation.eulerAngles.y, Vector3.up) * moveDir;
+
+        //moveDir *= movement.y;
+        
 
         //Look in direction of movement
         if (moveDir != Vector3.zero)

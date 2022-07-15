@@ -861,6 +861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640925750}
   - component: {fileID: 640925751}
+  - component: {fileID: 640925752}
   m_Layer: 0
   m_Name: FollowTarget
   m_TagString: Untagged
@@ -875,13 +876,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640925749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.1758738, y: 1.923, z: -1.7558799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 982534565}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &640925751
 MonoBehaviour:
@@ -896,6 +897,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camspeed: 10
+--- !u!1818360608 &640925752
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640925749}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 2.1758738, y: 1.923, z: -1.7558799}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 982534565}
+    weight: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1164,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   controller: {fileID: 982534566}
   movementSpeed: 6
+  followTarget: {fileID: 640925749}
 --- !u!136 &982534564
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1171,9 +1192,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 475303562}
-  - {fileID: 640925750}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &982534566
 CharacterController:
@@ -1443,7 +1463,7 @@ Transform:
   m_Children:
   - {fileID: 548202247}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1751667668
 MonoBehaviour:

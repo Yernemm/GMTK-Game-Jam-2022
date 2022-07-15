@@ -22,7 +22,9 @@ public class CameraController : MonoBehaviour
         Debug.Log(movement);
         //transform.Rotate(movement.x, 0, 0);
         //transform.Rotate(0, 25f * Time.deltaTime, 0);
-        transform.Rotate(movement.y * Time.deltaTime * camspeed, movement.x * Time.deltaTime * camspeed, 0, Space.World);
+        transform.Rotate(0, movement.x * Time.deltaTime * camspeed, 0, Space.World);
+
+        transform.rotation *= Quaternion.AngleAxis(-movement.y * Time.deltaTime * camspeed, Vector3.right);
         
     }
 
