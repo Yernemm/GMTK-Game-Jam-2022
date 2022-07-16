@@ -10,10 +10,12 @@ public class CameraController : MonoBehaviour
 
     public float camspeed;
 
+    public GameObject camAim;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -47,6 +49,18 @@ public class CameraController : MonoBehaviour
 
 
         transform.localEulerAngles = angles;
+
+
+        //ray cast to move aim object
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 100f))
+        {
+            camAim.transform.position = hit.point;
+        }
+        else
+        {
+            camAim.transform.position = transform.position + transform.forward * 100f;
+        }
         
         
         
