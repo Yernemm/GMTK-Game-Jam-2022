@@ -13,6 +13,8 @@ public class DiceRoller : MonoBehaviour
 
     // Update is called once per frame
 
+    public GameObject[] sideGlows;
+
     private bool firstRollFrame = true;
     private int bounceCount = 0;
     
@@ -30,9 +32,17 @@ public class DiceRoller : MonoBehaviour
                 //Stop da roll
                 playerController.stateToWalking();
                 bounceCount = 0;
+                StartCoroutine("glowSide");
             }
 
         }
+    }
+
+    IEnumerator glowSide(){
+        GameObject sideGlow = getUpSideGameObject();
+        sideGlow.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        sideGlow.SetActive(false);
     }
 
     public int getUpSideIndex(){
@@ -62,6 +72,11 @@ public class DiceRoller : MonoBehaviour
     public int getUpSideValue(){
         int[] mapping = {5, 2, 6, 1, 3, 4};
         return mapping[getUpSideIndex()];
+    }
+
+    public GameObject getUpSideGameObject(){
+        Debug.Log(sideGlows[getUpSideIndex()].name);
+        return sideGlows[getUpSideIndex()];
     }
 
     void OnCollisionEnter(Collision collision) {
