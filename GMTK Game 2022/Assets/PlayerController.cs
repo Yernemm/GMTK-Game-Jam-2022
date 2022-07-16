@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public Collider diceyCollider;
 
     public GameObject limbs;
+    public GameObject gameController;
 
 
     private void OnEnable() {
@@ -56,32 +57,58 @@ public class PlayerController : MonoBehaviour
         stateToWalking();
         //capsuleCollider = GetComponent<CapsuleCollider>();
         //diceyCollider = dicey.GetComponent<Collider>();
+
+        gameController = GameObject.Find("GameController");
     }
 
     // Update is called once per frame|
     void Update()
     {
 
-        //Movement dir
         Vector3 moveDir = new Vector3(movement.x, 0, movement.y);
-
-        //Vector3 moveDir = new Vector3(Mathf.Cos(followTarget.transform.rotation.eulerAngles.y),0,Mathf.Sin(followTarget.transform.rotation.eulerAngles.y));
-        
         moveDir = Quaternion.AngleAxis(followTarget.transform.rotation.eulerAngles.y, Vector3.up) * moveDir;
 
-        //moveDir *= movement.y;
-        
+        if(walkingState){
+                    //Movement dir
+            
 
-        //Look in direction of movement
-        if (moveDir != Vector3.zero && walkingState)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.15f);
+            //Vector3 moveDir = new Vector3(Mathf.Cos(followTarget.transform.rotation.eulerAngles.y),0,Mathf.Sin(followTarget.transform.rotation.eulerAngles.y));
+            
+            
+
+            //moveDir *= movement.y;
+            
+
+            //Look in direction of movement
+            if (moveDir != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.15f);
+            }
+
+            moveVelocity = moveDir * movementSpeed;
+
+            //Move
+            controller.SimpleMove(moveVelocity);
+        }else{
+            float maxHorizontalSpeed = 30f;
+
+            float beforeSpeed = rb.velocity.magnitude;
+            float airAcceleration = 10f;
+            rb.AddForce(moveDir * airAcceleration, ForceMode.Acceleration);
+            //rb.velocity.Normalize();
+            //rb.velocity = rb.velocity * beforeSpeed;
+
+
+            //clamp horizontal speed
+            Vector2 horspeed = new Vector2(rb.velocity.x, rb.velocity.z);
+            if (horspeed.magnitude > maxHorizontalSpeed)
+            {
+                horspeed.Normalize();
+                horspeed *= maxHorizontalSpeed;
+                rb.velocity = new Vector3(horspeed.x, rb.velocity.y, horspeed.y);
+            }
         }
 
-        moveVelocity = moveDir * movementSpeed;
-
-        //Move
-        controller.SimpleMove(moveVelocity);
 
 
         
@@ -91,11 +118,17 @@ public class PlayerController : MonoBehaviour
     void Jump() {
         //jumping is rolling player
         //transform.Translate(Vector2.up * Time.deltaTime * 10);
+
+        if(!walkingState) return;
+
         Debug.Log("Jump");
-        toggleState();
-        rb.AddForce(new Vector3(moveVelocity.x, 5f, moveVelocity.z) * 1.5f, ForceMode.Impulse);
+        
+        stateToJumping();
+        rb.AddForce(new Vector3(moveVelocity.x, 8f, moveVelocity.z) * 1.5f, ForceMode.Impulse);
         rb.maxAngularVelocity = 50f;
         rb.angularVelocity = Random.insideUnitSphere * 15;
+
+        gameController.GetComponent<TimeSpeed>().quickSlowMo();
         
     }
 
@@ -104,7 +137,7 @@ public class PlayerController : MonoBehaviour
         inputMaster.Disable();
     }
 
-    void stateToWalking(){
+    public void stateToWalking(){
         walkingState = true;
         rb.isKinematic = true;
         controller.enabled = true;
@@ -113,7 +146,7 @@ public class PlayerController : MonoBehaviour
         limbs.SetActive(true);
     }
 
-    void stateToJumping(){
+    public void stateToJumping(){
         walkingState = false;
         rb.isKinematic = false;
         controller.enabled = false;

@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log(movement);
+        //Debug.Log(movement);
         //transform.Rotate(movement.x, 0, 0);
         //transform.Rotate(0, 25f * Time.deltaTime, 0);
 

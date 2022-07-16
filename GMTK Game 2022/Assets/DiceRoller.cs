@@ -12,6 +12,10 @@ public class DiceRoller : MonoBehaviour
 
 
     // Update is called once per frame
+
+    private bool firstRollFrame = true;
+    private int bounceCount = 0;
+    
     void Update()
     {
 
@@ -21,6 +25,12 @@ public class DiceRoller : MonoBehaviour
 
     private void FixedUpdate() {
         if(!playerController.getWalkingState()){
+            //We rollin
+            if(bounceCount >= 1 && getAngularSpeed() < 2f || bounceCount >= 4){
+                //Stop da roll
+                playerController.stateToWalking();
+                bounceCount = 0;
+            }
 
         }
     }
@@ -59,6 +69,7 @@ public class DiceRoller : MonoBehaviour
         {
             Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
             Instantiate(bounceParticle, contact.point, Quaternion.identity);
+            bounceCount++;
         }    
     }
 
