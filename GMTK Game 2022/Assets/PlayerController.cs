@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public Collider capsuleCollider;
     public Collider diceyCollider;
 
+    public GameObject limbs;
+
 
     private void OnEnable() {
         if(inputMaster == null){           
@@ -92,7 +94,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Jump");
         toggleState();
         rb.AddForce(new Vector3(moveVelocity.x, 5f, moveVelocity.z) * 1.5f, ForceMode.Impulse);
-        rb.angularVelocity = Random.insideUnitSphere * 10;
+        rb.maxAngularVelocity = 50f;
+        rb.angularVelocity = Random.insideUnitSphere * 15;
+        
     }
 
     private void OnDisable() {
@@ -106,6 +110,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         capsuleCollider.enabled = true;
         diceyCollider.enabled = false;
+        limbs.SetActive(true);
     }
 
     void stateToJumping(){
@@ -114,6 +119,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = false;
         capsuleCollider.enabled = false;
         diceyCollider.enabled = true;
+        limbs.SetActive(false);
     }
 
     void toggleState(){
