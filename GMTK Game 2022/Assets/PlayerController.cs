@@ -16,6 +16,16 @@ public class PlayerController : MonoBehaviour
 
     //Follow target for cam used to get direction
     public GameObject followTarget;
+    public GameObject dicey;
+
+    Rigidbody rb;
+
+    bool walkingState = true;
+
+    Vector3 moveVelocity;
+
+    public Collider capsuleCollider;
+    public Collider diceyCollider;
 
 
     private void OnEnable() {
@@ -40,7 +50,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        stateToWalking();
+        //capsuleCollider = GetComponent<CapsuleCollider>();
+        //diceyCollider = dicey.GetComponent<Collider>();
     }
 
     // Update is called once per frame|
@@ -58,13 +71,15 @@ public class PlayerController : MonoBehaviour
         
 
         //Look in direction of movement
-        if (moveDir != Vector3.zero)
+        if (moveDir != Vector3.zero && walkingState)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 0.15f);
         }
 
+        moveVelocity = moveDir * movementSpeed;
+
         //Move
-        controller.Move(moveDir * movementSpeed * Time.deltaTime);
+        controller.SimpleMove(moveVelocity);
 
 
         
@@ -72,13 +87,43 @@ public class PlayerController : MonoBehaviour
 
 
     void Jump() {
-        //jump player
+        //jumping is rolling player
         //transform.Translate(Vector2.up * Time.deltaTime * 10);
         Debug.Log("Jump");
+        toggleState();
+        rb.AddForce(new Vector3(moveVelocity.x, 5f, moveVelocity.z) * 1.5f, ForceMode.Impulse);
+        rb.angularVelocity = Random.insideUnitSphere * 10;
     }
 
     private void OnDisable() {
         
         inputMaster.Disable();
+    }
+
+    void stateToWalking(){
+        walkingState = true;
+        rb.isKinematic = true;
+        controller.enabled = true;
+        capsuleCollider.enabled = true;
+        diceyCollider.enabled = false;
+    }
+
+    void stateToJumping(){
+        walkingState = false;
+        rb.isKinematic = false;
+        controller.enabled = false;
+        capsuleCollider.enabled = false;
+        diceyCollider.enabled = true;
+    }
+
+    void toggleState(){
+        if(walkingState) 
+            stateToJumping();
+        else 
+            stateToWalking();
+    }
+
+    public bool getWalkingState(){
+        return walkingState;
     }
 }
