@@ -17,6 +17,12 @@ public class DiceRoller : MonoBehaviour
 
     private bool firstRollFrame = true;
     private int bounceCount = 0;
+
+    UIStuff uiStuff;
+
+    private void Start() {
+        uiStuff = GameObject.Find("OverlayUI").GetComponent<UIStuff>();
+    }
     
     void Update()
     {
@@ -33,6 +39,7 @@ public class DiceRoller : MonoBehaviour
                 playerController.stateToWalking();
                 bounceCount = 0;
                 StartCoroutine("glowSide");
+                uiStuff.updateFace(getUpSideValue());
             }
 
         }
