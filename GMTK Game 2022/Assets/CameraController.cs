@@ -31,13 +31,23 @@ public class CameraController : MonoBehaviour
         //clamp
         Vector3 angles = transform.localEulerAngles;
 
+/*
         float angle = transform.localEulerAngles.x;
         if(angle > 180 && angle < 340)
             angles.x = 340;
         else if(angle < 180 && angle > 40)
             angles.x = 40;
+*/
+
+
+        float xangletemp = angles.x;
+        if (xangletemp > 360) xangletemp -= 360;
+        xangletemp = Mathf.Clamp(xangletemp, -50, 80);
+        angles.z = 0f;
+
 
         transform.localEulerAngles = angles;
+        
         
         
     }

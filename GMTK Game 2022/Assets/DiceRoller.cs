@@ -6,6 +6,7 @@ public class DiceRoller : MonoBehaviour
 {
 
     public PlayerController playerController;
+    public GameObject bounceParticle;
 
     // Start is called before the first frame update
 
@@ -51,5 +52,18 @@ public class DiceRoller : MonoBehaviour
     public int getUpSideValue(){
         int[] mapping = {5, 2, 6, 1, 3, 4};
         return mapping[getUpSideIndex()];
+    }
+
+    void OnCollisionEnter(Collision collision) {
+                foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
+            Instantiate(bounceParticle, contact.point, Quaternion.identity);
+        }    
+    }
+
+    public float getAngularSpeed(){
+        Vector3 vel = GetComponent<Rigidbody>().angularVelocity;
+        return vel.magnitude;
     }
 }

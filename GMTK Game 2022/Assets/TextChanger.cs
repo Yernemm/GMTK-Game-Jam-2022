@@ -18,6 +18,7 @@ public class TextChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = diceRoller.getUpSideValue().ToString();
+        //text.text = diceRoller.getUpSideValue().ToString();
+        text.text = diceRoller.getAngularSpeed().ToString();
     }
 }
