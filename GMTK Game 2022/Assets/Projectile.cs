@@ -18,24 +18,26 @@ public class Projectile : MonoBehaviour
 
     GameObject camAim;
 
+    GameObject player;
+
     
 
     // Start is called before the first frame update
     void Start()
     {
         camAim = GameObject.Find("CamAim");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(type){
-            case ProjectileType.Player:
-                target = camAim.transform;
-            break;
-            case ProjectileType.Enemy:
-                target = GameObject.Find("Player").transform;
-            break;
+
+
+        if(type == ProjectileType.Player){
+            target = camAim.transform;
+        }else{
+            target = player.transform;
         }
 
         Quaternion initRotation = transform.rotation;
@@ -52,9 +54,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         //Only hit solid stuff and player
-        if(!other.gameObject.CompareTag("Solid") && !other.gameObject.CompareTag("Player")) return;
+        if(!other.gameObject.CompareTag("Solid") && !other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Enemy")) return;
 
-        if(type == ProjectileType.Player && !other.gameObject.CompareTag("Player") || type == ProjectileType.Enemy){
+        if(type == ProjectileType.Player && !other.gameObject.CompareTag("Player") 
+        || type == ProjectileType.Enemy && !other.gameObject.CompareTag("Enemy")){
             Debug.Log(other);
             GameObject newExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
             newExplosion.GetComponent<Explosion>().type = type;

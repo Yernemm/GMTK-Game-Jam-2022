@@ -18,6 +18,7 @@ public class Explosion : MonoBehaviour
     {
         gameState = GameObject.Find("GameController").GetComponent<GameState>();
         player = GameObject.Find("Player");
+        GetComponent<Rigidbody>().MovePosition(transform.position);
     }
 
     // Update is called once per frame
@@ -30,7 +31,10 @@ public class Explosion : MonoBehaviour
         if(type == ProjectileType.Player){
             if(other.gameObject.tag == "Enemy"){
                 
+                Debug.Log("USDIHJFUISDHFUISDHFSUIDHFUSIDHFIUSDHF");
+                other.GetComponent<WeakSpot>().damage(damage, diceValue);
             }
+            Debug.Log(other.name);
         }
         else if(type == ProjectileType.Enemy){
             if(other.gameObject.tag == "Player"){

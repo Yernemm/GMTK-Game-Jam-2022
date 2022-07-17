@@ -7,11 +7,15 @@ public class ProjectileShooter : MonoBehaviour
 
     public GameObject projectile;
 
+    GameObject player;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         StartCoroutine("ShootLoop");
+
     }
 
     // Update is called once per frame
@@ -30,5 +34,6 @@ public class ProjectileShooter : MonoBehaviour
     void Shoot(){
         Debug.Log("Shoot");
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
+        projectileInstance.transform.LookAt(player.transform);
     }
 }

@@ -12,11 +12,29 @@ public class GameState : MonoBehaviour
 
     public UIStuff uiStuff;
 
+    public int bossHealth = 150;
+    public int maxBossHealth = 150;
+
+    public Dictionary<BossType, int> bossHealths = new Dictionary<BossType, int>();
+
+    public Dictionary<BossType, string> bossNames = new Dictionary<BossType, string>();
+
+
+    private void Start() {
+        bossHealths.Add(BossType.Wall, 50);
+        bossHealths.Add(BossType.Snake, 100);
+        bossHealths.Add(BossType.Spider, 150);
+        bossHealths.Add(BossType.Furby, 200);
+
+        bossNames.Add(BossType.Wall, "Wall of Unmoving");
+        bossNames.Add(BossType.Snake, "Snake the Snakey");
+        bossNames.Add(BossType.Spider, "Spider-Spider");
+        bossNames.Add(BossType.Furby, "Off-brand Furthing");
+
+    }
 
     private void FixedUpdate() {
-        if(Random.Range(0, 100) < 10){
-            damage(5);
-        }
+
     }
 
     public void death(){
@@ -51,8 +69,32 @@ public class GameState : MonoBehaviour
         uiStuff.updateHealth((float)playerHealth / (float)maxPlayerHealth);
     }
 
+    public void setBoss(BossType type){
+        bossHealth = bossHealths[type];
+        maxBossHealth = bossHealths[type];
+    }
+
+    public void damageBoss(int damage){
+        bossHealth -= damage;
+        uiStuff.updateBossHealth((float)bossHealth / (float)maxBossHealth);
+        if(bossHealth <= 0){
+            killBoss();
+        }
+    }
+
+    public void killBoss(){
+
+    }
 
 
 
 
+
+}
+
+public enum BossType{
+    Snake,
+    Spider,
+    Furby,
+    Wall
 }

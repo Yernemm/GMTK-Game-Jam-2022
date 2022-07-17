@@ -113,10 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2300
-  turnSpeed: 5
+  turnSpeed: 50
   explosion: {fileID: 7139792672971910552, guid: cd1c32f7ea8ec314b8fef7c1a4c0f562, type: 3}
   target: {fileID: 0}
   type: 0
+  diceValue: -1
 --- !u!96 &4489796391529832890
 TrailRenderer:
   serializedVersion: 2

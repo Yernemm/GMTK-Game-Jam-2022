@@ -40,7 +40,7 @@ public class UIStuff : MonoBehaviour
     }
 
     public void updateBossName(string name){
-
+        bossName.text = name;
     }
 
     public void updateEnergy(float energyPercent){

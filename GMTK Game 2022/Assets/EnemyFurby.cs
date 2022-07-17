@@ -24,7 +24,8 @@ public class EnemyFurby : MonoBehaviour
     void Update()
     {
         if(state == EnemyState.Aim){
-            Vector3 rot = Quaternion.LookRotation(player.transform.position - transform.position).eulerAngles;
+            //Vector3 rot = Quaternion.LookRotation(player.transform.position - transform.position).eulerAngles;
+            Vector3 rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime * 5f).eulerAngles;
             rot.x = rot.z = 0;
             transform.rotation = Quaternion.Euler(rot);
         }else if(state == EnemyState.Attack){
@@ -47,7 +48,10 @@ public class EnemyFurby : MonoBehaviour
             // Attack
             Debug.Log("ATTACK");
             state = EnemyState.Attack;
-            yield return new WaitForSeconds(.4f);
+            yield return new WaitForSeconds(.35f);
+
+            state = EnemyState.Idle;
+            yield return new WaitForSeconds(1.5f);
         }
         
     }
