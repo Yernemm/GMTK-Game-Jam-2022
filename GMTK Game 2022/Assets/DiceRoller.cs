@@ -18,10 +18,17 @@ public class DiceRoller : MonoBehaviour
     private bool firstRollFrame = true;
     private int bounceCount = 0;
 
+    public int lastIndexRolled = 0;
+    public int lastValueRolled = 0;
+
     UIStuff uiStuff;
+
+    GameState gameState;
 
     private void Start() {
         uiStuff = GameObject.Find("OverlayUI").GetComponent<UIStuff>();
+        gameState = GameObject.Find("GameController").GetComponent<GameState>();
+        StartCoroutine("healRoutine");
     }
     
     void Update()
@@ -40,6 +47,8 @@ public class DiceRoller : MonoBehaviour
                 bounceCount = 0;
                 StartCoroutine("glowSide");
                 uiStuff.updateFace(getUpSideValue());
+                lastIndexRolled = getUpSideIndex();
+                lastValueRolled = getUpSideValue();
             }
 
         }
@@ -98,5 +107,13 @@ public class DiceRoller : MonoBehaviour
     public float getAngularSpeed(){
         Vector3 vel = GetComponent<Rigidbody>().angularVelocity;
         return vel.magnitude;
+    }
+
+    IEnumerator healRoutine(){
+        while(true){
+            yield return new WaitForSeconds(1f);
+            if(lastValueRolled == 3)
+                gameState.heal(5);
+        }
     }
 }

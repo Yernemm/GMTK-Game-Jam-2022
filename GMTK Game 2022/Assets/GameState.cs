@@ -6,7 +6,7 @@ public class GameState : MonoBehaviour
 {
 
     
-    int playerHealth = 100;
+    public int playerHealth = 50;
     int maxPlayerHealth = 100;
     public GameObject spawnPoint;
 
@@ -56,6 +56,8 @@ public class GameState : MonoBehaviour
         foreach(GameObject obj in startingObjectives){
             objectives.Enqueue(obj);
         }
+
+        setHealth(80);
 
     }
 
