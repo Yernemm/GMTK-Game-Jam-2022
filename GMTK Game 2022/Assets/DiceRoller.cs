@@ -49,6 +49,10 @@ public class DiceRoller : MonoBehaviour
                 uiStuff.updateFace(getUpSideValue());
                 lastIndexRolled = getUpSideIndex();
                 lastValueRolled = getUpSideValue();
+
+                GetComponent<PlayerShoot>().maxAmmo = lastValueRolled;
+                GetComponent<PlayerShoot>().ammo = lastValueRolled;
+                uiStuff.updateEnergy(1f);
             }
 
         }
