@@ -41,6 +41,9 @@ public class GameState : MonoBehaviour
 
     public bool isBossFighting = false;
 
+    public AudioSource healsound;
+    public AudioSource damagesound;
+
 
     private void Start() {
         bossHealths.Add(BossType.Wall, 50);
@@ -93,6 +96,7 @@ public class GameState : MonoBehaviour
     }
 
     public void damage(int damage){
+        damagesound.Play();
         setHealth(playerHealth - damage);
         if(playerHealth <= 0){
             death();
@@ -112,6 +116,8 @@ public class GameState : MonoBehaviour
         setHealth(getHealth() + amount);
         if(playerHealth > 100){
             playerHealth = 100;
+        }else{
+            healsound.Play();
         }
     }
 
