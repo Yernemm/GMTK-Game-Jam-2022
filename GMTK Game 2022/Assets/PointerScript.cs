@@ -6,6 +6,7 @@ public class PointerScript : MonoBehaviour
 {
 
     GameState gameState;
+    public GameObject pointerBelow;
 
     // Start is called before the first frame update
     void Start()
@@ -17,5 +18,9 @@ public class PointerScript : MonoBehaviour
     void Update()
     {
         transform.LookAt(gameState.objective);
+
+        pointerBelow.SetActive(!gameState.isBossFighting);
+
+
     }
 }
