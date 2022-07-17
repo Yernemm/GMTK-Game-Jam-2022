@@ -19,6 +19,20 @@ public class GameState : MonoBehaviour
 
     public Dictionary<BossType, string> bossNames = new Dictionary<BossType, string>();
 
+    public GameObject[] bossesList;
+
+    Dictionary<BossType, GameObject> bosses = new Dictionary<BossType, GameObject>();
+
+    BossType currentBoss;
+
+    public GameObject bossExplosion;
+
+    public Transform objective;
+
+    public Queue<GameObject> objectives;
+
+    public GameObject[] startingObjectives;
+
 
     private void Start() {
         bossHealths.Add(BossType.Wall, 50);
@@ -31,6 +45,22 @@ public class GameState : MonoBehaviour
         bossNames.Add(BossType.Spider, "Spider-Spider");
         bossNames.Add(BossType.Furby, "Off-brand Furthing");
 
+        bosses.Add(BossType.Wall, bossesList[0]);
+        bosses.Add(BossType.Snake, bossesList[1]);
+        bosses.Add(BossType.Spider, bossesList[2]);
+        bosses.Add(BossType.Furby, bossesList[3]);
+        
+        currentBoss = BossType.Spider;
+
+        objectives = new Queue<GameObject>();
+        foreach(GameObject obj in startingObjectives){
+            objectives.Enqueue(obj);
+        }
+
+    }
+
+    private void Update() {
+        objective = objectives.Peek().transform;
     }
 
     private void FixedUpdate() {
@@ -72,6 +102,7 @@ public class GameState : MonoBehaviour
     public void setBoss(BossType type){
         bossHealth = bossHealths[type];
         maxBossHealth = bossHealths[type];
+        currentBoss = type;
     }
 
     public void damageBoss(int damage){
@@ -83,7 +114,14 @@ public class GameState : MonoBehaviour
     }
 
     public void killBoss(){
+        Instantiate(bossExplosion, bosses[currentBoss].transform.position, Quaternion.identity);
+        bosses[currentBoss].SetActive(false);
+    }
 
+    public void objectiveComplete(){
+        if(objectives.Count > 0){
+            Destroy(objectives.Dequeue());
+        }
     }
 
 
