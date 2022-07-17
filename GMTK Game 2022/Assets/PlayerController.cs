@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         rb.maxAngularVelocity = 50f;
         rb.angularVelocity = Random.insideUnitSphere * 15;
 
-        //gameController.GetComponent<TimeSpeed>().quickSlowMo();
+        gameController.GetComponent<TimeSpeed>().quickSlowMo();
         
     }
 

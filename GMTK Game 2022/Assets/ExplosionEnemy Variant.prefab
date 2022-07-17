@@ -20,6 +20,10 @@ PrefabInstance:
       value: ExplosionEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7139792672971910554, guid: cd1c32f7ea8ec314b8fef7c1a4c0f562, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139792672971910554, guid: cd1c32f7ea8ec314b8fef7c1a4c0f562, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}

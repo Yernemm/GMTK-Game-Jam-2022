@@ -14,6 +14,8 @@ public class Projectile : MonoBehaviour
 
     public ProjectileType type;
 
+    public int diceValue = -1;
+
     GameObject camAim;
 
     
@@ -49,10 +51,14 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+        //Only hit solid stuff and player
+        if(!other.gameObject.CompareTag("Solid") && !other.gameObject.CompareTag("Player")) return;
+
         if(type == ProjectileType.Player && !other.gameObject.CompareTag("Player") || type == ProjectileType.Enemy){
             Debug.Log(other);
             GameObject newExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(newExplosion, 25f);
+            newExplosion.GetComponent<Explosion>().type = type;
+            newExplosion.GetComponent<Explosion>().diceValue = diceValue;
             Destroy(gameObject);
         }
         

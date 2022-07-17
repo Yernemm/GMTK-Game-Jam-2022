@@ -7,6 +7,12 @@ public class UIStuff : MonoBehaviour
 {
 
     public Sprite[] diceFaces;
+
+    public Image bossBar;
+    public Text bossName;
+
+    public Image playerHealthBar;
+    public Image energyBar;
     public Image diceImage;
 
     // Start is called before the first frame update
@@ -23,5 +29,21 @@ public class UIStuff : MonoBehaviour
 
     public void updateFace(int face){
         diceImage.sprite = diceFaces[face];
+    }
+
+    public void updateHealth(float healthPercent){
+        playerHealthBar.fillAmount = healthPercent;
+    }
+
+    public void updateBossHealth(float healthPercent){
+        bossBar.fillAmount = healthPercent;
+    }
+
+    public void updateBossName(string name){
+
+    }
+
+    public void updateEnergy(float energyPercent){
+        energyBar.fillAmount = energyPercent;
     }
 }

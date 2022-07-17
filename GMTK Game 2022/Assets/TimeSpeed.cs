@@ -28,7 +28,7 @@ public class TimeSpeed : MonoBehaviour
     }
 
     public void quickSlowMo(){
-        slowMo(0.5f, 1f);
+        slowMo(0.4f, .8f);
     }
 
     public void slowMo(float amount, float duration){
