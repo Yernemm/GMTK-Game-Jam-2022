@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2300
   turnSpeed: 5
-  explosion: {fileID: 5520065189437633380, guid: 0c9c7e489f8bdf44f8028972c04dba69, type: 3}
+  explosion: {fileID: 1822933975659832539, guid: b452596e4762c544aafc1428c8fba270, type: 3}
   target: {fileID: 0}
   type: 1
 --- !u!54 &-4460814555223776408
