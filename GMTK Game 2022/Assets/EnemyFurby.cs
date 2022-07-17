@@ -12,6 +12,8 @@ public class EnemyFurby : MonoBehaviour
 
     CharacterController characterController;
 
+    float gravity = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,10 @@ public class EnemyFurby : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gravity -= 9.8f * Time.deltaTime;
+        if(characterController.isGrounded){
+            gravity = 0;
+        }
         if(state == EnemyState.Aim){
             //Vector3 rot = Quaternion.LookRotation(player.transform.position - transform.position).eulerAngles;
             Vector3 rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime * 5f).eulerAngles;
@@ -30,7 +36,9 @@ public class EnemyFurby : MonoBehaviour
             transform.rotation = Quaternion.Euler(rot);
         }else if(state == EnemyState.Attack){
             characterController.Move(transform.forward * Time.deltaTime * 130f);
+            
         }
+        characterController.Move(new Vector3(0, gravity, 0));
         
         Debug.Log(state);
     }
