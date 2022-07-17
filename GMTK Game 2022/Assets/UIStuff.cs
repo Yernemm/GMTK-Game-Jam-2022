@@ -9,7 +9,7 @@ public class UIStuff : MonoBehaviour
     public Sprite[] diceFaces;
 
     public Image bossBar;
-    public Text bossName;
+    public TMPro.TMP_Text bossName;
 
     public Image playerHealthBar;
     public Image energyBar;

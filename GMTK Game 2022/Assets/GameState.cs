@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -33,6 +34,13 @@ public class GameState : MonoBehaviour
 
     public GameObject[] startingObjectives;
 
+    GameObject player;
+    BossType[] bossenums = {BossType.Wall, BossType.Snake, BossType.Spider, BossType.Furby};
+
+    int currentBossIndex = -1;
+
+    public bool isBossFighting = false;
+
 
     private void Start() {
         bossHealths.Add(BossType.Wall, 50);
@@ -59,10 +67,21 @@ public class GameState : MonoBehaviour
 
         setHealth(80);
 
+        player = GameObject.Find("Player");
+
+        uiStuff.updateBossName("");
+        uiStuff.updateBossHealth(0);
+
+        
+
     }
 
     private void Update() {
         objective = objectives.Peek().transform;
+
+        if(player.transform.position.y < -10){
+            death();
+        }
     }
 
     private void FixedUpdate() {
@@ -70,7 +89,7 @@ public class GameState : MonoBehaviour
     }
 
     public void death(){
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void damage(int damage){
@@ -105,6 +124,9 @@ public class GameState : MonoBehaviour
         bossHealth = bossHealths[type];
         maxBossHealth = bossHealths[type];
         currentBoss = type;
+        uiStuff.updateBossName(bossNames[type]);
+        uiStuff.updateBossHealth((float)bossHealth / (float)maxBossHealth);
+        isBossFighting = true;
     }
 
     public void damageBoss(int damage){
@@ -118,13 +140,23 @@ public class GameState : MonoBehaviour
     public void killBoss(){
         Instantiate(bossExplosion, bosses[currentBoss].transform.position, Quaternion.identity);
         bosses[currentBoss].SetActive(false);
+        uiStuff.updateBossName("");
+        objectiveComplete();
+        isBossFighting = false;
     }
 
     public void objectiveComplete(){
         if(objectives.Count > 0){
             Destroy(objectives.Dequeue());
+            objectives.Peek().SetActive(true);
+            if(objectives.Peek().tag != "Waypoint"){
+                currentBossIndex++;
+                setBoss(bossenums[currentBossIndex]);
+            }
         }
     }
+
+   
 
 
 
