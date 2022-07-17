@@ -817,7 +817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &211053102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6155,6 +6155,7 @@ GameObject:
   - component: {fileID: 1741115207}
   - component: {fileID: 1741115206}
   - component: {fileID: 1741115208}
+  - component: {fileID: 1741115209}
   m_Layer: 0
   m_Name: Obj1
   m_TagString: Waypoint
@@ -6203,6 +6204,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: {fileID: 0}
+--- !u!114 &1741115209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741115205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2e837045ab2e444835dd562b2b246e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 1431543159}
 --- !u!1 &1751667665
 GameObject:
   m_ObjectHideFlags: 0
@@ -6250,7 +6264,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.9261672, y: 1}
+    m_SensorSize: {x: 1.3337222, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7178,6 +7192,7 @@ GameObject:
   - component: {fileID: 2070250088}
   - component: {fileID: 2070250087}
   - component: {fileID: 2070250086}
+  - component: {fileID: 2070250089}
   m_Layer: 0
   m_Name: Obj6
   m_TagString: Waypoint
@@ -7226,6 +7241,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2070250089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070250085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4252eb7b21b9cf549ae702a417aad2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2133736673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b788977773f55b941b795d75027c4105, type: 3}
