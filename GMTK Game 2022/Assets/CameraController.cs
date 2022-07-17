@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
 
         //ray cast to move aim object
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 100f))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f))
         {
             camAim.transform.position = hit.point;
         }

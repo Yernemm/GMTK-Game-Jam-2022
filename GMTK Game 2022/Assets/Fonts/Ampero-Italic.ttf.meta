@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: b26ec61e3df233d409b3e96b4990dbe8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Ampero
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4033b88f70c057e4ba9b8eeac9b889db, type: 3}
+  - {fileID: 12800000, guid: c108e655f40da704bb3d5200ac4b62de, type: 3}
+  - {fileID: 12800000, guid: 0115afb5561bc1d4b9154f8100c7aab2, type: 3}
+  - {fileID: 12800000, guid: 61c9fc8b9e2080a45a040e4e0adf68d9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

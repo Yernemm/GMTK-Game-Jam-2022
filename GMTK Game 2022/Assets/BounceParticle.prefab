@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2503036198299532547}
   - component: {fileID: -6118229624205246163}
   - component: {fileID: -6640181215620818973}
+  - component: {fileID: -2928885345143470496}
   m_Layer: 0
   m_Name: BounceParticle
   m_TagString: Untagged
@@ -4897,7 +4898,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 963567fdd7556874d8f1fecbebf7b2ec, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4996,3 +4997,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.8
   maxPitch: 1.2
+--- !u!114 &-2928885345143470496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5520065189437633380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe1b22e15b402b47b869f2bd8c7fced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 963567fdd7556874d8f1fecbebf7b2ec, type: 3}
+  - {fileID: 8300000, guid: 3329f17946f48dc4898df84da7688caf, type: 3}
+  - {fileID: 8300000, guid: 3dce317ebc7f1f74db80fae940c3bab1, type: 3}
+  - {fileID: 8300000, guid: 301741e1140fc70429929334528b654e, type: 3}
+  - {fileID: 8300000, guid: e412f5f2b1f8c4d47920dc9fc334cb2b, type: 3}
+  - {fileID: 8300000, guid: a1fde78897bb5e74d8985c4af4553b45, type: 3}
+  - {fileID: 8300000, guid: a0643273d25d50d40bf66ca36e64f07d, type: 3}
