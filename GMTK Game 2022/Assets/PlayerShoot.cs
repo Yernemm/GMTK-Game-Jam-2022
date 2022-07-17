@@ -15,6 +15,12 @@ public class PlayerShoot : MonoBehaviour
 
     float cooldown = 0f;
 
+    public int ammo = 6;
+
+    public int maxAmmo = 6;
+
+    public UIStuff uiStuff;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,9 +54,11 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if(isShooting && cooldown <= 0f) {
+        if(isShooting && cooldown <= 0f && ammo > 0) {
             Shoot();
             cooldown = 1f / fireRate;
+            ammo--;
+            uiStuff.updateEnergy((float)ammo / (float)maxAmmo);
         }
 
         if(cooldown > 0) {

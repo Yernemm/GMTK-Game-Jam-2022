@@ -6,6 +6,7 @@ public class Teleporter : MonoBehaviour
 {
 
     public GameObject destination;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,10 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player"){
-            other.gameObject.transform.position = destination.transform.position;
+            GameObject player = GameObject.Find("Player");
+            player.GetComponent<PlayerController>().stateToWalking();
+            player.gameObject.transform.position = destination.transform.position;
+            
         }
     }
 }
